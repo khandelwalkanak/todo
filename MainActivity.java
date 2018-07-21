@@ -29,17 +29,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         arrayList = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, com.example.caneeraj.todo.screen_edit.class);
-                intent.putExtra(com.example.caneeraj.todo.code_message.EDIT_DATA,arrayList.get(position));
-                intent.putExtra(com.example.caneeraj.todo.code_message.ITEM_POS,position);
+                intent.setClass(MainActivity.this,screen_edit.class);
+                intent.putExtra(code_message.EDIT_DATA,arrayList.get(position));
+                intent.putExtra(code_message.ITEM_POS,position);
 
-                startActivityForResult(intent, com.example.caneeraj.todo.code_message.REQUEST_CODE_NEW);
+                startActivityForResult(intent,code_message.REQUEST_CODE_NEW);
             }
         });
         try {
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v)
     {
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, com.example.caneeraj.todo.data_addition.class);
-        startActivityForResult(intent, com.example.caneeraj.todo.code_message.REQUEST_CODE);
+        intent.setClass(MainActivity.this,data_addition.class);
+        startActivityForResult(intent,code_message.REQUEST_CODE);
     }
 
     public void onBackPressed() {
@@ -79,16 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(resultCode == com.example.caneeraj.todo.code_message.RESULT_CODE)
+        if(resultCode == code_message.RESULT_CODE)
         {
-            messageText = data.getStringExtra(com.example.caneeraj.todo.code_message.MESSAGE_FIELD);
+            messageText = data.getStringExtra(code_message.MESSAGE_FIELD);
             arrayList.add(messageText);
             arrayAdapter.notifyDataSetChanged();
         }
-        else if (resultCode == com.example.caneeraj.todo.code_message.RESULT_CODE_NEW)
+        else if (resultCode == code_message.RESULT_CODE_NEW)
         {
-            messageText = data.getStringExtra(com.example.caneeraj.todo.code_message.MESSAGE);
-            pos = data.getIntExtra(com.example.caneeraj.todo.code_message.ITEM_POS,-1);
+            messageText = data.getStringExtra(code_message.MESSAGE);
+            pos = data.getIntExtra(code_message.ITEM_POS,-1);
             arrayList.set(pos,messageText);
             arrayAdapter.notifyDataSetChanged();
         }
