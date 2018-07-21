@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     String messageText;
     int pos;
+    //.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
